@@ -21,7 +21,7 @@ public class CarServiceImpl implements CarService {
     }
 
     @Override
-    public CarResponse saveUser(CarRequest request) {
+    public CarResponse saveCar(CarRequest request) {
         Car car = carConverter.toCar(request);
         Car savedCar = carRepository.save(car);
 

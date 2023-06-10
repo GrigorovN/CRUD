@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 @Service
 public interface CarService {
 
-    CarResponse saveUser(CarRequest request);
+    CarResponse saveCar(CarRequest request);
 
     CarResponse getCar(Long id);
 

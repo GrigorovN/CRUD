@@ -8,6 +8,8 @@ import com.example.module16homework.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
@@ -40,8 +42,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updateUser(Long id, UserRequest request) {
+    public UserResponse updateUser(Long id, UserRequest request) {
+        User user = userRepository.findById(id).orElseThrow();
 
+        if (Objects.nonNull(request.getFirstName()) && !request.getFirstName().isBlank()){
+            user.setFirstName(request.getFirstName());
+        }
+        if (Objects.nonNull(request.getLastName()) && !request.getLastName().isBlank()){
+            user.setLastName(request.getLastName());
+        }
+        if (Objects.nonNull(request.getEmail()) && !request.getEmail().isBlank()){
+            user.setEmail(request.getEmail());
+        }
+        if (Objects.nonNull(request.getPassword()) && !request.getPassword().isBlank()){
+            user.setPassword(request.getPassword());
+        }
+        return userConverter.toResponse(userRepository.save(user));
     }
 
 }
